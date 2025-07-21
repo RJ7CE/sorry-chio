@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lo siento</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background-color: #e6f0ff;
+      margin: 0;
+      padding-top: 40px;
+    }
+    h1 {
+      color: #4682b4;
+      font-size: 3em;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+    #siBtn {
+      background-color: #a3c9f9;
+      color: #fff;
+    }
+    #noBtn {
+      background-color: #add8e6;
+      color: #333;
+      position: absolute;
+    }
+    #extraBtn {
+      background-color: #cde4ff;
+      color: #2b2b2b;
+      display: none;
+    }
+    #mensaje {
+      font-size: 1.3em;
+      color: #4169e1;
+      margin-top: 30px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #regalo {
+      font-size: 1.5em;
+      color: #4682b4;
+      margin-top: 30px;
+    }
+    #imagen {
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿Me perdonas, Chio?</h1>
+  <img src="sorry-card.png" alt="Imagen tierna de perdón" id="imagen" width="250">
+
+  <div>
+    <button id="siBtn">Sí &#128591;</button>
+    <button id="noBtn">No &#128530;</button>
+  </div>
+
+  <div id="mensaje"></div>
+  <button id="extraBtn">Ver más</button>
+  <div id="regalo"></div>
+
+  <script>
+    const siBtn = document.getElementById("siBtn");
+    const noBtn = document.getElementById("noBtn");
+    const mensaje = document.getElementById("mensaje");
+    const extraBtn = document.getElementById("extraBtn");
+    const regalo = document.getElementById("regalo");
+
+    siBtn.addEventListener("click", () => {
+  const texto = `Hola Chìo
+
+He estado pensando mucho en lo que pasó y en cómo me comporté contigo…
+no fue justo, actué mal, y no hay excusa que lo justifique y si mis acciones y mi actitud te lastimaron de alguna forma, lo lamento profundamente.
+
+No fue mi intención incomodarte ni quedar mal contigo.
+A veces me dejo llevar y meto la pata, pero sí me importa corregirlo.
+Me agradas y me gustaría que este vínculo de colegas aún siga creciendo, sin que lo que hice se interponga.
+
+¡No te culparía si hubieras elegido el botón “No” pero seguiría escapando XD!
+Pero el “Sí” viene con una sorpresa si presionas en Ver más
+`;
+  let i = 0;
+  mensaje.innerHTML = "";
+
+  // Ocultar los botones Sí y No
+  siBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  function escribir() {
+    if (i < texto.length) {
+      mensaje.innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
+      i++;
+      setTimeout(escribir, 40);
+    } else {
+      mensaje.innerHTML += `<br>`;
+      extraBtn.style.display = "inline-block";
+    }
+  }
+
+  escribir();
+});
+
+    extraBtn.addEventListener("click", () => {
+      regalo.innerHTML = `
+        Vale por un Acaí 🍧<br>
+        <img src="acai-bowl-web.png" alt="Vale por un Acaí" width="250">
+      `;
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    });
+  </script>
+</body>
+</html>
